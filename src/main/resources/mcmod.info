@@ -1,0 +1,16 @@
+[
+{
+  "modid": "lbsw-enhancements",
+  "name": "Mia's Lucky Block SW Enhancements",
+  "description": "<3",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["mia"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
