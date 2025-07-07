@@ -18,7 +18,6 @@ import java.util.List;
 
 // -- This whole system probably requires a refactor/reworking --
 // (it was created without considering potential features which were added later, messily)
-// todo serialize somehow
 public class GUIManager {
 
     private static final File GUI_SAVE_FOLDER = new File(LBMain.SAVE_FOLDER.getAbsolutePath() + "\\gui");
