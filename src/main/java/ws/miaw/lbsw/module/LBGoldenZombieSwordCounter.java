@@ -50,6 +50,10 @@ public class LBGoldenZombieSwordCounter extends LBModule {
         if(!GameUtil.isInLBSWGame()) return;
 
         if (e.target instanceof EntityPlayer) {
+            if(e.entityPlayer == null) return;
+            if(e.entityPlayer.getHeldItem() == null) return;
+            if(e.entityPlayer.getHeldItem().getDisplayName() == null) return;
+
             String attackedWith = e.entityPlayer.getHeldItem().getDisplayName();
             if (!attackedWith.equals(SWORD_ITEM_NAME)) return;
 

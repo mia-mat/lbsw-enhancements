@@ -70,15 +70,18 @@ public abstract class LBTrueDamageWeaponBase extends LBModule {
 
     @SubscribeEvent
     public void onHit(AttackEntityEvent e) {
-        if (!isEnabled()) return;
-
-        if (!GameUtil.isInLBSWGame()) {
+        if (!isEnabled() || !GameUtil.isInLBSWGame()) {
             this.timerElement.setVisible(false);
 
             if (timer != null) timer.cancel();
+            return;
         }
 
         if (e.target instanceof EntityPlayer) {
+            if(e.entityPlayer == null) return;
+            if(e.entityPlayer.getHeldItem() == null) return;
+            if(e.entityPlayer.getHeldItem().getDisplayName() == null) return;
+
             String attackedWith = e.entityPlayer.getHeldItem().getDisplayName();
             if (!attackedWith.equals(getWeaponName())) return;
 
