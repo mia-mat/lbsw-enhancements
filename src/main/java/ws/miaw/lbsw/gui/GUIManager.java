@@ -56,12 +56,12 @@ public class GUIManager {
         this.rendering = true;
     }
 
-    /// Registers if an element by the same ID is not already registered
-    public void registerElement(GUIElement element) {
+    /// Registers if an element by the same ID is not already registered, returns the registered element
+    public GUIElement registerElement(GUIElement element) {
 
         for (GUIElement guiElement : getElements()) {
             if (guiElement.getId().equals(element.getId())) {
-                return;
+                return guiElement;
             }
         }
 
@@ -74,6 +74,7 @@ public class GUIManager {
         }
 
         elements.add(element);
+        return element;
     }
 
     @SubscribeEvent
@@ -177,9 +178,18 @@ public class GUIManager {
 
     protected void loadSerializedElements() throws IOException, ClassNotFoundException {
         for (File file : GUI_ELEMENTS_SAVE_FOLDER.listFiles()) {
-            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
-            GUIElement element = (GUIElement) ois.readObject();
-            registerElement(element);
+            ObjectInputStream ois = null;
+            try {
+                ois = new ObjectInputStream(new FileInputStream(file));
+                GUIElement element = (GUIElement) ois.readObject();
+                registerElement(element);
+            } catch (InvalidClassException e) { // UID
+                // just delete the old file, not really important
+                if(ois != null) ois.close();
+                file.delete();
+
+            }
+
         }
 
         if (GUI_PANES_TOGGLE_FILE.exists()) {

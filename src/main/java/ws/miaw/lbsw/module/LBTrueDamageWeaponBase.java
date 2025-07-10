@@ -50,7 +50,7 @@ public abstract class LBTrueDamageWeaponBase extends LBModule {
         super.init();
 
         this.timerElement = new GUIElement(getModuleId(), GUI_MESSAGE(getCooldown()), 20, 20, 1, false, getGuiColour(), true, false);
-        LBMain.getGUIManager().registerElement(timerElement);
+        this.timerElement = LBMain.getGUIManager().registerElement(timerElement);
 
         this.countdownTask = new TimerTask() {
             @Override

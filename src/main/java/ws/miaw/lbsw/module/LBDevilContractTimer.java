@@ -38,7 +38,7 @@ public class LBDevilContractTimer extends LBModule{
         super.init();
 
         this.timerElement = new GUIElement(getModuleId(), GUI_MESSAGE(60), 20, 20, 1, false, GUI_COLOUR, true, false);
-        LBMain.getGUIManager().registerElement(timerElement);
+        this.timerElement = LBMain.getGUIManager().registerElement(timerElement);
 
         this.countdownTask = new TimerTask() {
             @Override

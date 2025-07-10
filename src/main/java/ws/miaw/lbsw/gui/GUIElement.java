@@ -3,10 +3,14 @@ package ws.miaw.lbsw.gui;
 import ws.miaw.lbsw.LBMain;
 
 import java.awt.*;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.UUID;
 
 public class GUIElement implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private final String id; // for serialization, must be unique.
 
@@ -14,7 +18,7 @@ public class GUIElement implements Serializable {
 
     private long guiLayer = 0;
 
-    private boolean visible;
+    private transient boolean visible;
     private boolean needsInGameFocus;
 
     private Color colour;
@@ -126,5 +130,10 @@ public class GUIElement implements Serializable {
 
     public void setGuiLayer(long guiLayer) {
         this.guiLayer = guiLayer;
+    }
+
+    private void readObject(ObjectInputStream input) throws IOException, ClassNotFoundException {
+        input.readObject();
+        visible = false; // transient
     }
 }

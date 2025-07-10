@@ -38,7 +38,7 @@ public class LBGoldenZombieSwordCounter extends LBModule {
         super.init();
 
         this.counterElement = new GUIElement(getModuleId(), GUI_MESSAGE(10), 0, 0, 1, false, GUI_COLOUR, true, false);
-        LBMain.getGUIManager().registerElement(counterElement);
+        this.counterElement = LBMain.getGUIManager().registerElement(counterElement);
     }
 
     /// Hypixel's implementation of the counter is such that the unique item does not matter; it is tied to the player.
