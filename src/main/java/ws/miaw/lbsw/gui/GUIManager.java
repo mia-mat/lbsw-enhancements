@@ -187,7 +187,6 @@ public class GUIManager {
                 // just delete the old file, not really important
                 if(ois != null) ois.close();
                 file.delete();
-
             }
 
         }

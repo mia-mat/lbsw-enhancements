@@ -88,7 +88,7 @@ public abstract class LBTrueDamageWeaponBase extends LBModule {
             timerElement.setVisible(true);
             currentTimer = getCooldown();
             timer = new Timer();
-            timer.scheduleAtFixedRate(countdownTask, (long) getTimerTaskPeriodInSeconds() * 1000L, (long) getTimerTaskPeriodInSeconds() * 1000L);
+            timer.scheduleAtFixedRate(countdownTask, (long) (getTimerTaskPeriodInSeconds() * 1000L), (long) (getTimerTaskPeriodInSeconds() * 1000L));
         }
 
 
