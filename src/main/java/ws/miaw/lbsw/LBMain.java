@@ -17,7 +17,7 @@ import java.io.File;
 @Mod(modid = LBMain.MODID, version = LBMain.VERSION)
 public class LBMain {
     public static final String MODID = "miawlbsw";
-    public static final String VERSION = "1.1.4";
+    public static final String VERSION = "1.1.5";
 
     private static GUIManager guiManager;
     private static LBModuleManager moduleManager;

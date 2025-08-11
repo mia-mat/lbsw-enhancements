@@ -41,8 +41,6 @@ public abstract class LBTrueDamageWeaponBase extends LBModule {
     private GUIElement timerElement;
     private double currentTimer = getCooldown();
 
-    private TimerTask countdownTask;
-
     private Timer timer;
 
     @Override
@@ -52,20 +50,6 @@ public abstract class LBTrueDamageWeaponBase extends LBModule {
         this.timerElement = new GUIElement(getModuleId(), GUI_MESSAGE(getCooldown()), 20, 20, 1, false, getGuiColour(), true, false);
         this.timerElement = LBMain.getGUIManager().registerElement(timerElement);
 
-        this.countdownTask = new TimerTask() {
-            @Override
-            public void run() {
-                currentTimer -= getTimerTaskPeriodInSeconds();
-
-                if (currentTimer <= 0) {
-                    timer.cancel();
-                    timer = null;
-                    timerElement.setVisible(false);
-                }
-
-                timerElement.setText(GUI_MESSAGE(currentTimer));
-            }
-        };
     }
 
     @SubscribeEvent
@@ -88,10 +72,27 @@ public abstract class LBTrueDamageWeaponBase extends LBModule {
             timerElement.setVisible(true);
             currentTimer = getCooldown();
             timer = new Timer();
-            timer.scheduleAtFixedRate(countdownTask, (long) (getTimerTaskPeriodInSeconds() * 1000L), (long) (getTimerTaskPeriodInSeconds() * 1000L));
+            timer.scheduleAtFixedRate(getCountdownTask(), (long) (getTimerTaskPeriodInSeconds() * 1000L), (long) (getTimerTaskPeriodInSeconds() * 1000L));
         }
 
 
+    }
+
+    public TimerTask getCountdownTask() {
+        return new TimerTask() {
+            @Override
+            public void run() {
+                currentTimer -= getTimerTaskPeriodInSeconds();
+
+                if (currentTimer <= 0) {
+                    timer.cancel();
+                    timer = null;
+                    timerElement.setVisible(false);
+                }
+
+                timerElement.setText(GUI_MESSAGE(currentTimer));
+            }
+        };
     }
 
 }
